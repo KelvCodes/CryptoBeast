@@ -59,7 +59,7 @@ Stay ahead in the crypto world with live updates, price charts, and historical d
 
 ## 🤝 Contributing  
 
-Want to make Community Impact Wheel Web App even better? We’d love your help! 💡  
+Want to make  Web App even better? We’d love your help! 💡  
 1. Fork this repository.  
 2. Create a new branch:  
    ```bash  
@@ -112,7 +112,7 @@ Have feedback, ideas, or just want to chat? Reach out to me:
 If you enjoy my projects, feel free to [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-%F0%9F%8C%8D-yellow?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/kelvcodes) 
 
 ---
-Enjoy Community Impact Wheel,and don’t forget to ⭐ the repo if you like it! 🥳✨  
+Enjoy ,and don’t forget to ⭐ the repo if you like it! 🥳✨  
 
 
 
