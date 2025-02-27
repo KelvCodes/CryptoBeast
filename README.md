@@ -39,7 +39,7 @@ Stay ahead in the crypto world with live updates, price charts, and historical d
 
 2️⃣ **View Market Trends** – Get live updates on prices and market caps. 📊  
 
-3️⃣  **Track Your Progress** – Keep a log of completed challenges. ✅  
+3️⃣  
 
 
 
