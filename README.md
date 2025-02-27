@@ -38,7 +38,7 @@ Stay ahead in the crypto world with live updates, price charts, and historical d
 1️⃣ **Search for a Coin** – Enter a cryptocurrency name or symbol. 🔍
 
 2️⃣ **View Market Trends** – Get live updates on prices and market caps. 📊  
-3️⃣  
+3️⃣   **Check Coin Details** – Click on a coin for historical data and insights. 📈  
 
 
 
