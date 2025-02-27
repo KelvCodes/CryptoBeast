@@ -35,7 +35,7 @@ Stay ahead in the crypto world with live updates, price charts, and historical d
 ---
 
 ## 🚀 How to Use 
-1️⃣  **Spin the Wheel** – Click the spin button and receive a challenge! 🎡
+1️⃣ 
 
 2️⃣  **Complete the Task** – Follow through and make a difference! 🌍 
 
