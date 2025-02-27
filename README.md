@@ -13,7 +13,7 @@ Stay ahead in the crypto world with live updates, price charts, and historical d
 - ✅ **📉 Price Charts** – View historical trends of your favorite coins.  
 - ✅ **🌙 Dark Mode** – A stylish dark theme for better viewing.
 - ✅ **📱 Fully Responsive** – Works on desktop, tablet, and mobile. .
-- ✅ **📱 Fully Responsive** – Optimized for desktop & mobile. 
+- ✅
   
   
 ---      
