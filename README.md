@@ -11,7 +11,7 @@ Stay ahead in the crypto world with live updates, price charts, and historical d
 - ✅  **🔍 Powerful Search** – Easily find any cryptocurrency. 
 - ✅ **🎭 Smooth Animations** – A sleek, modern UI with beautiful transitions.  
 - ✅ **📉 Price Charts** – View historical trends of your favorite coins.  
-- ✅ 
+- ✅ **🌙 Dark Mode** – A stylish dark theme for better viewing.
 - ✅ **🌙 Dark Mode** – A sleek, modern experience for all users.
 - ✅ **📱 Fully Responsive** – Optimized for desktop & mobile. 
   
