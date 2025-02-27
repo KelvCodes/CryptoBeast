@@ -7,7 +7,7 @@ Stay ahead in the crypto world with live updates, price charts, and historical d
 
 ## 🌟 Features  
 - ✅ **🔥 Real-Time Data** – Get live prices and market updates.  .  
-- ✅ **🌍 Social Responsibility Focus** – Actions that help the environment & society. 
+- 
 - ✅ **🎭 Smooth Animations** – Realistic wheel spinning with easing effects. 
 - ✅ **📅 Daily Challenges** – A fresh new challenge every day!  
 - ✅ **📊 Progress Tracking** – Keep a history of completed challenges.
