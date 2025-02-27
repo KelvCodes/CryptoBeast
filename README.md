@@ -37,7 +37,7 @@ Stay ahead in the crypto world with live updates, price charts, and historical d
 ## 🚀 How to Use 
 1️⃣ **Search for a Coin** – Enter a cryptocurrency name or symbol. 🔍
 
-2️⃣  **Complete the Task** – Follow through and make a difference! 🌍 
+2️⃣ 
 
 3️⃣  **Track Your Progress** – Keep a log of completed challenges. ✅  
 
