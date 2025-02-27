@@ -1,4 +1,4 @@
-# 🌍 Community Impact Wheel – Gamify Social Good! 🎡✨   
+# 🚀 Crypto Tracker – Real-Time Market Insights! 💰📊  
 
 A **fun and interactive** web app that encourages users to make a positive impact on their community! Spin the wheel to receive **daily challenges** like planting a tree, reducing plastic use, or supporting local businesses. Track your progress and celebrate your achievements! 🌱🤝
 
