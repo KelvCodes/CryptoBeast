@@ -49,7 +49,7 @@ Stay ahead in the crypto world with live updates, price charts, and historical d
 
 1. Clone this repository to your local machine:  
    ```bash  
-   git clone https://github.com/yourusername/crypto.git
+   git clone https://github.com/yourusername/crypto-.git
    ```  
 
 2. Open the `index.html` file in your favorite web browser. 🌐  
