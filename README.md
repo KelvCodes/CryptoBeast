@@ -10,7 +10,7 @@ Stay ahead in the crypto world with live updates, price charts, and historical d
 - ✅ **📊 Coin Details Page** – View in-depth insights for each coin. 
 - ✅  **🔍 Powerful Search** – Easily find any cryptocurrency. 
 - ✅ **🎭 Smooth Animations** – A sleek, modern UI with beautiful transitions.  
-- ✅ **📊 Progress Tracking** – Keep a history of completed challenges.
+- ✅ 
 - ✅ **🎉 Confetti Animation** – Celebrate completed challenges with style!
 - ✅ **🌙 Dark Mode** – A sleek, modern experience for all users.
 - ✅ **📱 Fully Responsive** – Optimized for desktop & mobile. 
