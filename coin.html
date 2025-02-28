@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="header">
+        <h1>🔍 Coin Details</h1>
+        <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+    </header>
+
+    <main>
+        <div class="coin-container">
+            <div class="coin-card">
+                <img id="coin-img" src="" alt="Coin Logo">
+                <h2 id="coin-name"></h2>
+                <p><strong>Symbol:</strong> <span id="coin-symbol"></span></p>
+                <p><strong>Current Price:</strong> $<span id="coin-price"></span></p>
+                <p><strong>Market Cap:</strong> $<span id="coin-marketcap"></span></p>
+                <p><strong>24h Change:</strong> <span id="coin-change"></span>%</p>
+                <button class="back-btn" onclick="history.back()">🔙 Go Back</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>⚡ Crypto Tracker &copy; 2025 | Built By <a class="footer-link" href="http://github.com/KelvCodes">Kelvin Yeboah</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: white;
+    text-align: center;
+}
+header {
+    padding: 20px;
+}
+input {
+    padding: 10px;
+    font-size: 16px;
+}
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #444;
+}
+th {
+    background-color: #222;
+}
+.positive { color: limegreen; }
+.negative { color: red; }
+
+/* Global Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #121212;
+    color: #fff;
+    text-align: center;
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    background: linear-gradient(135deg, #ff8c00, #ff2e63);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Call-to-Action Button */
+.cta-btn {
+    background: #fff;
+    color: #ff2e63;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.cta-btn:hover {
+    transform: scale(1.1);
+    background: #ff2e63;
+    color: #fff;
+}
+
+/* Floating Crypto Icons */
+.floating-icons {
+    position: absolute;
+    bottom: 10%;
+    display: flex;
+    gap: 20px;
+}
+
+.crypto-icon {
+    width: 50px;
+    animation: float 3s infinite ease-in-out;
+}
+
+.crypto-icon:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.crypto-icon:nth-child(3) {
+    animation-delay: 1s;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Footer */
+footer {
+    background: #222;
+    padding: 15px 0;
+    margin-top: -20px;
+}
+
+footer p {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.social-icons img {
+    width: 30px;
+    margin: 0 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.social-icons img:hover {
+    transform: scale(1.2);
+}
+
+
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #121212;
+    color: #fff;
+    text-align: center;
+    transition: background 0.3s ease-in-out;
+}
+
+header {
+    background: linear-gradient(135deg, #ff8c00, #ff2e63);
+    padding: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    background: #fff;
+    color: #ff2e63;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50px;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+.dark-mode-toggle:hover {
+    background: #ff2e63;
+    color: #fff;
+}
+
+/* Crypto Table */
+.crypto-container {
+    padding: 20px;
+}
+
+.crypto-table {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.crypto-table th, .crypto-table td {
+    padding: 15px;
+    border-bottom: 1px solid #555;
+}
+
+.crypto-table th {
+    background: #ff2e63;
+    color: #fff;
+}
+
+.crypto-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+
+/* Coin Details */
+.coin-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.coin-card {
+    background: linear-gradient(135deg, #2a2a72, #009ffd);
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.coin-card img {
+    width: 80px;
+}
+
+.coin-card h2 {
+    font-size: 1.8rem;
+    margin: 10px 0;
+}
+
+.coin-card p {
+    font-size: 1.1rem;
+    margin: 5px 0;
+}
+
+/* Back Button */
+.back-btn {
+    background: #fff;
+    color: #009ffd;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.back-btn:hover {
+    background: #009ffd;
+    color: #fff;
+}
+
+/* Footer */
+footer {
+    background: #222;
+    padding: 15px 0;
+    margin-top: 20px;
+}

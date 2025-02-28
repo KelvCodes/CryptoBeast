@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Prices</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="header">
+        <h1>📊 Live Cryptocurrency Prices</h1>
+        <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+    </header>
+
+    <main>
+        <div class="crypto-container">
+            <table class="crypto-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Coin</th>
+                        <th>Price</th>
+                        <th>24h Change</th>
+                        <th>Market Cap</th>
+                    </tr>
+                </thead>
+                <tbody id="crypto-data">
+                    <!-- Crypto data loads here dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p>⚡ Crypto Tracker &copy; 2025 | Built By <a href="http://github.com/KelvCodes">Kelvin Yeboah</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
