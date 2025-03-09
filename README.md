@@ -15,7 +15,6 @@ Stay ahead in the crypto world with live updates, price charts, and historical d
 - ✅ **🔗 Social Footer** – Follow us on YouTube, LinkedIn, and Instagram!  
 
   
-  
 ---      
 ## 🎬 Live Demo 
 
