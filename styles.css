@@ -1,13 +1,4 @@
-
-}
-
-.social-icons img {
-    width: 30px;
-    margin: 0 10px;
-    transition: transform 0.3s ease-in-out;
-}
-
-.social-icons img:hover {
+ocial-icons img:hover {
     transform: scale(1.2);
 }
 
