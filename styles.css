@@ -1,14 +1,5 @@
 
-.floating-icons {
-    position: absolute;
-    bottom: 10%;
-    display: flex;
-    gap: 20px;
-}
-
-.crypto-icon {
-    width: 50px;
-    animation: float 3s infinite ease-in-out;
+.f3s infinite ease-in-out;
 }
 
 .crypto-icon:nth-child(2) {
