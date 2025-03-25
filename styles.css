@@ -1,1 +1,425 @@
+/* Base Styles */
+:root {
+    --primary: #ff2e63;
+    --secondary: #ff8c00;
+    --dark: #121212;
+    --darker: #0a0a0a;
+    --light: #ffffff;
+    --gray: #2d2d2d;
+    --success: #4caf50;
+    --danger: #f44336;
+}
 
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #000000, #1a1a1a, #7f1d1d); /* From React code */
+    color: var(--light);
+    min-height: 100vh; /* Allows scrolling for other pages */
+}
+
+/* Landing Page Specific Styles */
+body.landing-page {
+    height: 100vh; /* Constrains landing page to viewport */
+    overflow: hidden; /* No scrolling on landing page */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    --dark: #1a1a1a;
+    --darker: #121212;
+    --gray: #333333;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(to bottom right, #000000, #1a1a1a, #7f1d1d); /* Matches landing page */
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.header-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Buttons */
+.dark-mode-toggle, .connect-wallet-btn, .cta-btn, .back-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.dark-mode-toggle {
+    background: var(--light);
+    color: var(--primary);
+}
+
+.connect-wallet-btn {
+    background: var(--light);
+    color: var(--primary);
+}
+
+.cta-btn {
+    background: var(--light);
+    color: var(--primary);
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    border: 2px solid var(--primary);
+}
+
+.back-btn {
+    background: var(--gray);
+    color: var(--light);
+    width: 100%;
+    margin-top: 1rem;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cta-btn:hover {
+    background: var(--primary);
+    color: var(--light);
+}
+
+/* Hero Section (Landing Page) */
+.landing-page .hero {
+    flex: 1; /* Takes remaining space after header and footer */
+    background: linear-gradient(to bottom right, #000000, #1a1a1a, #7f1d1d); /* Matches body */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem; /* Reduced gap to fit within viewport */
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    animation: fadeIn 1s ease-out;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.cta-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Floating Icons */
+.floating-icons {
+    display: flex;
+    gap: 2rem;
+}
+
+.crypto-icon {
+    width: 50px; /* Reduced size to fit landing page */
+    animation: float 4s infinite ease-in-out;
+}
+
+.crypto-icon:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.crypto-icon:nth-child(3) {
+    animation-delay: 1s;
+}
+
+/* Blockchain Panel */
+.blockchain-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    margin: 1rem auto;
+    max-width: 1200px;
+}
+
+.blockchain-stat {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.blockchain-stat:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.blockchain-stat h3 {
+    margin-top: 0;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.blockchain-stat p {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+/* Crypto Table */
+.crypto-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.search-box input {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.crypto-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.crypto-table th {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    text-align: left;
+}
+
+.crypto-table td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.crypto-table tr:last-child td {
+    border-bottom: none;
+}
+
+.crypto-table tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Coin Card */
+.coin-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.coin-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.coin-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.coin-logo {
+    width: 60px;
+    height: 60px;
+}
+
+.price-container {
+    margin-bottom: 2rem;
+}
+
+.price-display {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.change-display {
+    font-size: 1.2rem;
+    margin-left: 1rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+}
+
+.change-display.positive {
+    background: rgba(76, 175, 80, 0.2);
+    color: var(--success);
+}
+
+.change-display.negative {
+    background: rgba(244, 67, 54, 0.2);
+    color: var(--danger);
+}
+
+.coin-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.3rem;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.chart-container {
+    margin: 2rem 0;
+    position: relative;
+    height: 300px;
+}
+
+.chart-controls {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.chart-controls button {
+    padding: 0.3rem 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.chart-controls button:hover {
+    background: var(--primary);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.price-up {
+    animation: pulse 1s ease;
+    color: var(--success);
+}
+
+.price-down {
+    animation: pulse 1s ease;
+    color: var(--danger);
+}
+
+/* Footer */
+.landing-page footer {
+    text-align: center;
+    padding: 1rem; /* Reduced padding to fit within 100vh */
+    background: rgba(255, 255, 255, 0.03);
+}
+
+footer {
+    text-align: center;
+    padding: 2rem; /* Default for other pages */
+    background: rgba(255, 255, 255, 0.03);
+    margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header {
+        padding: 0.75rem 1rem;
+    }
+
+    .header h1 {
+        font-size: 1.2rem;
+    }
+
+    .cta-btn {
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .crypto-icon {
+        width: 40px;
+    }
+
+    .blockchain-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .crypto-table {
+        font-size: 0.9rem;
+    }
+
+    .coin-stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
