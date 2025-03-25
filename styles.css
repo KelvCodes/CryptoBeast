@@ -1,12 +1,4 @@
 
-    max-width: 600px;
-    animation: fadeIn 2s ease-in-out;
-}
-
-/* Call-to-Action Button */
-.cta-btn {
-    background: #fff;
-    color: #ff2e63;
     padding: 15px 30px;
     font-size: 1.2rem;
     border: none;
