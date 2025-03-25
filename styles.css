@@ -1,13 +1,4 @@
 
-    paddi
-
-.cta-btn:hover {
-    transform: scale(1.1);
-    background: #ff2e63;
-    color: #fff;
-}
-
-/* Floating Crypto Icons */
 .floating-icons {
     position: absolute;
     bottom: 10%;
