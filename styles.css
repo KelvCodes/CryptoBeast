@@ -1,12 +1,6 @@
 
     
-    margin: 20px auto;
-    border-collapse: collapse;
-}
-th, td {
-    padding: 10px;
-    border-bottom: 1px solid #444;
-}
+
 th {
     background-color: #222;
 }
