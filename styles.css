@@ -1,12 +1,4 @@
 
-;
-    margin-bottom: 10px;
-    animation: fadeIn 1.5s ease-in-out;
-}
-
-.hero p {
-    font-size: 1.2rem;
-    opacity: 0.9;
     max-width: 600px;
     animation: fadeIn 2s ease-in-out;
 }
