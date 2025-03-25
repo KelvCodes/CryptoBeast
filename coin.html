@@ -1,1 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Analytics | CryptoZen</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+</head>
+<body>
+    <header class="header">
+        <h1 id="coin-header"><i class="fas fa-search"></i> Coin Analytics</h1>
+        <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+            <i class="fas fa-moon"></i>
+        </button>
+    </header>
 
+    <main>
+        <div class="coin-container">
+            <div class="coin-card">
+                <div class="coin-header">
+                    <img id="coin-img" src="" alt="Coin Logo" class="coin-logo">
+                    <div>
+                        <h2 id="coin-name"></h2>
+                        <p class="coin-symbol" id="coin-symbol"></p>
+                    </div>
+                </div>
+
+                <div class="price-container">
+                    <span id="coin-price" class="price-display"></span>
+                    <span id="price-change" class="change-display"></span>
+                </div>
+
+                <div class="coin-stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-label">Market Cap</span>
+                        <span id="coin-marketcap" class="stat-value"></span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Volume (24h)</span>
+                        <span id="coin-volume" class="stat-value"></span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Circulating Supply</span>
+                        <span id="coin-supply" class="stat-value"></span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">All-Time High</span>
+                        <span id="coin-ath" class="stat-value"></span>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="priceChart"></canvas>
+                    <div class="chart-controls">
+                        <button onclick="fetchChartData(coinId, 1)">24h</button>
+                        <button onclick="fetchChartData(coinId, 7)">7d</button>
+                        <button onclick="fetchChartData(coinId, 30)">30d</button>
+                        <button onclick="fetchChartData(coinId, 90)">90d</button>
+                    </div>
+                </div>
+
+                <div class="blockchain-data">
+                    <h3><i class="fas fa-link"></i> On-Chain Metrics</h3>
+                    <div class="on-chain-metrics" id="on-chain-metrics">
+                        <!-- Blockchain data loads here -->
+                    </div>
+                </div>
+
+                <button class="back-btn" onclick="history.back()">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p><i class="fas fa-bolt"></i> CryptoZen © 2025</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+    <script src="chart.js"></script>
+    <script src="coin.js"></script>
+</body>
+</html>
