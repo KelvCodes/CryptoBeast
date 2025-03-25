@@ -1,15 +1,5 @@
 
-
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-}
-
-.hero h1 {
-    font-size: 3rem;
-    font-weight: bold;
+;
     margin-bottom: 10px;
     animation: fadeIn 1.5s ease-in-out;
 }
