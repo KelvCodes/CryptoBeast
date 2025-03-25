@@ -1,14 +1,4 @@
-ocial-icons img:hover {
-    transform: scale(1.2);
-}
 
-
-/* General Styles */
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #121212;
     color: #fff;
     text-align: center;
     transition: background 0.3s ease-in-out;
