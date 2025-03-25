@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoZen Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+</head>
+<body>
+    <header class="header">
+        <h1><i class="fas fa-chart-bar"></i> CryptoZen Dashboard</h1>
+        <div class="header-controls">
+            <button class="connect-wallet-btn" onclick="connectWallet()">
+                <i class="fas fa-wallet"></i> Connect Wallet
+            </button>
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
 
+    <main>
+        <div class="blockchain-panel">
+            <div class="blockchain-stat">
+                <h3><i class="fas fa-sync-alt"></i> Latest BTC Block</h3>
+                <p id="latest-block">Loading...</p>
+            </div>
+            <div class="blockchain-stat">
+                <h3><i class="fas fa-gas-pump"></i> ETH Gas Price</h3>
+                <p id="eth-gas">Loading...</p>
+            </div>
+            <div class="blockchain-stat">
+                <h3><i class="fas fa-users"></i> Active Addresses</h3>
+                <p id="active-addresses">Loading...</p>
+            </div>
+        </div>
+
+        <div class="crypto-container">
+            <div class="table-header">
+                <h2>Top Cryptocurrencies</h2>
+                <div class="search-box">
+                    <input type="text" id="search-crypto" placeholder="Search coins...">
+                </div>
+            </div>
+            <table class="crypto-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Coin</th>
+                        <th>Price</th>
+                        <th>24h</th>
+                        <th>Volume</th>
+                        <th>Market Cap</th>
+                        <th>Last 7 Days</th>
+                    </tr>
+                </thead>
+                <tbody id="crypto-data">
+                    <!-- Data loads here -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p><i class="fas fa-bolt"></i> CryptoZen © 2025 | <a href="http://github.com/KelvCodes">Kelvin Yeboah</a></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+    <script src="chart.js"></script>
+</body>
+</html>
