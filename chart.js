@@ -1,12 +1,4 @@
 
-                        display: false,
-                        drawBorder: false
-                    },
-                    ticks: {
-                        maxTicksLimit: 8,
-                        autoSkip: true
-                    }
-                },
                 y: {
                     grid: {
                         color: 'rgba(255, 255, 255, 0.1)',
