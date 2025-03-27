@@ -1,13 +1,6 @@
 abel: 'Price',
                 data: data,
-                borderColor: '#ff2e63',
-                backgroundColor: gradient,
-                borderWidth: 2,
-                tension: 0.4,
-                fill: true,
-                pointRadius: 0
-            }]
-        },
+      
         options: {
             responsive: true,
             maintainAspectRatio: false,
