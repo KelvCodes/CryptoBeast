@@ -1,10 +1,4 @@
-chart
-    coinChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Price',
+abel: 'Price',
                 data: data,
                 borderColor: '#ff2e63',
                 backgroundColor: gradient,
