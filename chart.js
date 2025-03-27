@@ -1,13 +1,4 @@
-{
-                        label: function(context) {
-                            return `$${context.parsed.y.toLocaleString()}`;
-                        }
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    grid: {
+
                         display: false,
                         drawBorder: false
                     },
