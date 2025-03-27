@@ -1,11 +1,4 @@
-ching chart data:', error);
-    }(price[0]);
-        return days <= 1 ? date.toLocaleTimeString() : date.toLocaleDateString();
-    });
-    
-    const data = prices.map(price => price[1]);
-    
-    // Calculate gradient
+ gradient
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
     gradient.addColorStop(0, 'rgba(255, 46, 99, 0.3)');
     gradient.addColorStop(1, 'rgba(255, 46, 99, 0)');
