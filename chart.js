@@ -1,12 +1,4 @@
-
-                y: {
-                    grid: {
-                        color: 'rgba(255, 255, 255, 0.1)',
-                        drawBorder: false
-                    },
-                    ticks: {
-                        callback: function(value) {
-                            return `$${value.toLocaleString()}`;
+eString()}`;
                         }
                     }
                 }
