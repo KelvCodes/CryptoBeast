@@ -1,9 +1,4 @@
- gradientif exists
-    if (coinChart) {
-        coinChart.destroy();
-    }
-    
-    // Create new chart
+chart
     coinChart = new Chart(ctx, {
         type: 'line',
         data: {
