@@ -1,13 +1,5 @@
 ching chart data:', error);
-    }
-}
-
-function renderChart(prices, coinId, days) {
-    const ctx = document.getElementById('priceChart').getContext('2d');
-    
-    // Format data
-    const labels = prices.map(price => {
-        const date = new Date(price[0]);
+    }(price[0]);
         return days <= 1 ? date.toLocaleTimeString() : date.toLocaleDateString();
     });
     
