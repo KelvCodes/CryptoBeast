@@ -1,9 +1,4 @@
- gradient
-    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, 'rgba(255, 46, 99, 0.3)');
-    gradient.addColorStop(1, 'rgba(255, 46, 99, 0)');
-    
-    // Destroy previous chart if exists
+ gradientif exists
     if (coinChart) {
         coinChart.destroy();
     }
