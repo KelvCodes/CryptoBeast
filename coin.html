@@ -1,1 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+</head>
+<body>
+    <header class="header">
+        <h1 id="coin-header">Coin Details</h1>
+        <div class="header-controls">
+            <button class="connect-wallet-btn" onclick="connectWallet()">Connect Wallet</button>
+            <span id="wallet-status">Not Connected</span>
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+            <button class="back-btn" onclick="window.location.href='crypto.html'">Back to Dashboard</button>
+        </div>
+    </header>
 
+    <div class="coin-container">
+        <div class="coin-card">
+            <div class="coin-header">
+                <img id="coin-img" class="coin-logo" src="https://via.placeholder.com/50" alt="Coin Logo" onerror="this.src='https://via.placeholder.com/50';">
+                <div>
+                    <h2 id="coin-name">Loading...</h2>
+                    <span id="coin-symbol" class="coin-symbol"></span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span id="coin-price" class="price-display">$0.00</span>
+                <span id="price-change" class="change-display">0.00%</span>
+            </div>
+            <div class="coin-stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label">Market Cap</span>
+                    <span id="coin-marketcap" class="stat-value">$0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">24h Volume</span>
+                    <span id="coin-volume" class="stat-value">$0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Circulating Supply</span>
+                    <span id="coin-supply" class="stat-value">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">All-Time High</span>
+                    <span id="coin-ath" class="stat-value">$0</span>
+                </div>
+            </div>
+            <div class="chart-container">
+                <h3>Price History</h3>
+                <canvas id="price-chart"></canvas>
+                <div class="chart-controls">
+                    <button onclick="fetchChartData(window.coinId, 7)">7D</button>
+                    <button onclick="fetchChartData(window.coinId, 30)">30D</button>
+                    <button onclick="fetchChartData(window.coinId, 90)">90D</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 CryptoZen. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
