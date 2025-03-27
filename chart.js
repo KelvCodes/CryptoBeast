@@ -1,8 +1,4 @@
- data = await response.json();
-        
-        renderChart(data.prices, coinId, days);
-    } catch (error) {
-        console.error('Error fetching chart data:', error);
+ching chart data:', error);
     }
 }
 
