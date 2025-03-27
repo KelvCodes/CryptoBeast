@@ -1,13 +1,4 @@
-abel: 'Price',
-                data: data,
-      
-        {
-                    display: false
-                },
-                tooltip: {
-                    mode: 'index',
-                    intersect: false,
-                    callbacks: {
+{
                         label: function(context) {
                             return `$${context.parsed.y.toLocaleString()}`;
                         }
