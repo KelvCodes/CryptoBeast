@@ -1,9 +1,4 @@
-let coinChart;
-
-async function fetchChartData(coinId = 'bitcoin', days = 30) {
-    try {
-        const response = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${days}`);
-        const data = await response.json();
+ data = await response.json();
         
         renderChart(data.prices, coinId, days);
     } catch (error) {
