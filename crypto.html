@@ -1,1 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoGPT | Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+</head>
+<body>
+    <header class="header">
+        <h1><i class="fas fa-chalkboard"></i>Crypto Dashboard</h1>
+        <div class="header-controls">
+            <button class="connect-wallet-btn" onclick="connectWallet()">
+                <span class="wallet-status">Connect Wallet</span>
+            </button>
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+        </div>
+    </header>
 
+    <section class="blockchain-section">
+        <h2>Blockchain Insights</h2>
+        <div class="blockchain-grid">
+            <div class="blockchain-stat loading">
+                <h3><i class="fas fa-cube"></i> Latest BTC Block</h3>
+                <p>Loading...</p>
+            </div>
+            <div class="blockchain-stat loading">
+                <h3><i class="fas fa-gas-pump"></i> ETH Gas Price</h3>
+                <p>Loading...</p>
+            </div>
+            <div class="blockchain-stat loading">
+                <h3><i class="fas fa-users"></i> Active Addresses (ETH)</h3>
+                <p>Loading...</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="crypto-section">
+        <h2>Top Cryptocurrencies</h2>
+        <input type="text" class="search-box" placeholder="Search cryptocurrencies...">
+        <div class="crypto-table-wrapper">
+            <table class="crypto-table"></table>
+        </div>
+    </section>
+
+    <section class="gainers-losers-section">
+        <h2>Top Gainers & Losers (24h)</h2>
+        <div class="gainers-losers-container">
+            <div class="gainers">
+                <h3>Top Gainers</h3>
+                <div class="gainers-list"></div>
+            </div>
+            <div class="losers">
+                <h3>Top Losers</h3>
+                <div class="losers-list"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio-section">
+        <h2>Your Portfolio</h2>
+        <div class="portfolio-message">
+            <h3>Connect Your Wallet</h3>
+            <p>Connect your wallet to view your portfolio.</p>
+            <button class="portfolio-cta-btn" onclick="connectWallet()">Connect Wallet</button>
+        </div>
+        <div class="portfolio-grid"></div>
+    </section>
+
+
+
+    <section class="prediction-section">
+        <h2>Price Prediction</h2>
+        <div class="prediction-controls">
+            <input type="text" class="predict-search-box" placeholder="Enter crypto (e.g., Bitcoin)">
+            <button onclick="fetchAndPredict()">Predict</button>
+        </div>
+        <canvas id="prediction-chart"></canvas>
+        <p class="prediction-status-text">Enter a crypto to predict its price!</p>
+    </section>
+   
+<section class="quotes-section">
+    <h2>Crypto Wisdom</h2>
+    <div class="quotes-container">
+        <blockquote class="crypto-quote">
+            <p id="quote-text">Loading quote...</p>
+            <cite id="quote-author">Unknown</cite>
+        </blockquote>
+    </div>
+</section>
+
+    <footer>
+        <p>&copy; 2025 CryptoGPT. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.5.4/dist/ethers.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
