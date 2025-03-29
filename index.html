@@ -1,1 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoGPT| Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="landing-page">
+    <header class="header">
+        <h1>
+            <img src="img/cryptozen-logo.png" alt="CryptoZen Logo" class="header-logo"> CryptoGPT
+        </h1>
+        <div class="header-controls">
+            <button class="cta-btn" onclick="location.href='crypto.html'">
+                <i class="fas fa-chart-line"></i> Explore Dashboard
+            </button>
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+        </div>
+    </header>
 
+    <main class="hero">
+        <div class="hero-content">
+            <h1><i class="fas fa-rocket"></i> Your Web3 & ML Crypto Command Center</h1>
+            <p>Track portfolios, predict prices with AI, and explore blockchain insights—all in one place.</p>
+            <div class="floating-icons">
+                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC" class="crypto-icon">
+                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH" class="crypto-icon">
+                <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="SOL" class="crypto-icon">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <h3>
+                    <img src="/img/cryptozen-logo.png" alt="CryptoBeast Logo" class="footer-logo">
+                    CryptoBeast 🌟
+                </h3>
+                <p>🚀 A personal crypto journey</p>
+                <p>🧑‍💻 Created by Agyare Kelvin Yeboah</p>
+            </div>
+            <div class="footer-middle">
+                <h4>Explore 🔍</h4>
+                <ul>
+                    <li><a href="https://kelvinagyareyeboah.netlify.app"><i class="fas fa-wallet"></i> My Portfolio</a></li>
+                    <li><a href="https://drive.google.com/file/d/1NmSaZvbunQVkovdeHWJKt5h-58t5yd1y/view?usp=drivesdk"><i class="fas fa-book"></i> Crypto Notes</a></li>
+                    <li><a href="https://drive.google.com/file/d/1NmSaZvbunQVkovdeHWJKt5h-58t5yd1y/view?usp=drivesdk"><i class="fas fa-tools"></i> Tools I Use</a></li>
+                    <li><a href="https://kelvinagyareyeboah.netlify.app"><i class="fas fa-user"></i> About Me</a></li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <h4>Connect and let's build 📱</h4>
+                <div class="social-links">
+                    <a href="https://instagram.com/_.yo.kelvin"><i class="fab fa-instagram"></i> Instagram </a>
+                    <a href="https://github.com/KelvCodes"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://www.linkedin.com/in/kelvin-agyare-yeboah-6728a7301/"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    
+                </div>
+                <p class="copyright">© 2025 CryptoBeast. All rights reserved. ⚖️</p>
+            </div>
+        </div>
+    </footer>
+    
+    <style>
+    footer {
+        padding: 2rem 1rem;
+        background: var(--card-bg-light);
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 0.9rem;
+        margin-top: 120px;
+    }
+    
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+    
+    .footer-left,
+    .footer-middle,
+    .footer-right {
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    .footer-left h3 {
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .footer-logo {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+    
+    .footer-middle ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .footer-middle ul li {
+        margin: 0.5rem 0;
+    }
+    
+    .footer-middle a {
+        text-decoration: none;
+        color: inherit;
+        opacity: 0.8;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .footer-middle a:hover {
+        opacity: 1;
+    }
+    
+    .footer-right .social-links {
+        margin: 1rem 0;
+        display: flex;
+        gap: 1rem;
+    }
+    
+    .footer-right .social-links a {
+        text-decoration: none;
+        color: inherit;
+        opacity: 0.8;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .footer-right .social-links a:hover {
+        opacity: 1;
+    }
+    
+    .copyright {
+        margin-top: 1rem;
+        opacity: 0.8;
+    }
+    
+    body.dark-mode footer {
+        background: rgba(255, 255, 255, 0.03);
+    }
+    
+    .landing-page footer {
+        padding: 1rem;
+    }
+    
+    @media (max-width: 768px) {
+        .footer-container {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .footer-left h3 {
+            justify-content: center;
+        }
+        
+        .footer-middle a {
+            justify-content: center;
+        }
+        
+        .footer-right .social-links {
+            justify-content: center;
+        }
+    }
+    </style>
+
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
