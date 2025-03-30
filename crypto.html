@@ -1,1 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoBeast | Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    
+</head>
+<body>
+    <header class="header">
+        <h1><i class="fas fa-chalkboard"></i>Crypto Dashboard</h1>
+        <div class="header-controls">
+            <button class="connect-wallet-btn" onclick="connectWallet()">
+                <span class="wallet-status">Connect Wallet</span>
+            </button>
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+        </div>
+    </header>
 
+    <section class="blockchain-section">
+        <h2>Blockchain Insights</h2>
+        <div class="blockchain-grid">
+            <div class="blockchain-stat loading">
+                <h3><i class="fas fa-cube"></i> Latest BTC Block</h3>
+                <p>Loading...</p>
+            </div>
+            <div class="blockchain-stat loading">
+                <h3><i class="fas fa-gas-pump"></i> ETH Gas Price</h3>
+                <p>Loading...</p>
+            </div>
+            <div class="blockchain-stat loading">
+                <h3><i class="fas fa-users"></i> Active Addresses (ETH)</h3>
+                <p>Loading...</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="crypto-section">
+        <h2>Top Cryptocurrencies</h2>
+        <input type="text" class="search-box" placeholder="Search cryptocurrencies...">
+        <div class="crypto-table-wrapper">
+            <table class="crypto-table"></table>
+        </div>
+    </section>
+
+    <section class="gainers-losers-section">
+        <h2>Top Gainers & Losers (24h)</h2>
+        <div class="gainers-losers-container">
+            <div class="gainers">
+                <h3>Top Gainers</h3>
+                <div class="gainers-list"></div>
+            </div>
+            <div class="losers">
+                <h3>Top Losers</h3>
+                <div class="losers-list"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio-section">
+        <h2>Your Portfolio</h2>
+        <div class="portfolio-message">
+            <h3>Connect Your Wallet</h3>
+            <p>Connect your wallet to view your portfolio.</p>
+            <button class="portfolio-cta-btn" onclick="connectWallet()">Connect Wallet</button>
+        </div>
+        <div class="portfolio-grid"></div>
+    </section>
+
+
+
+    <section class="prediction-section">
+        <h2>Price Prediction</h2>
+        <div class="prediction-controls">
+            <input type="text" class="predict-search-box" placeholder="Enter crypto (e.g., Bitcoin)">
+            <button onclick="fetchAndPredict()">Predict</button>
+        </div>
+        <canvas id="prediction-chart"></canvas>
+        <p class="prediction-status-text">Enter a crypto to predict its price!</p>
+    </section>
+   
+<section class="quotes-section">
+    <h2>Crypto Wisdom</h2>
+    <div class="quotes-container">
+        <blockquote class="crypto-quote">
+            <p id="quote-text">Loading quote...</p>
+            <cite id="quote-author">Unknown</cite>
+        </blockquote>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-left">
+            <h3>
+                <img src="/img/cryptozen-logo.png" alt="CryptoBeast Logo" class="footer-logo">
+                CryptoBeast 🌟
+            </h3>
+            <p>🚀 A personal crypto journey</p>
+            <p>🧑‍💻 Created by Agyare Kelvin Yeboah</p>
+        </div>
+        <div class="footer-middle">
+            <h4>Explore 🔍</h4>
+            <ul>
+                <li><a href="https://kelvinagyareyeboah.netlify.app"><i class="fas fa-wallet"></i> My Portfolio</a></li>
+                <li><a href="https://drive.google.com/file/d/1NmSaZvbunQVkovdeHWJKt5h-58t5yd1y/view?usp=drivesdk"><i class="fas fa-book"></i> Crypto Notes</a></li>
+                <li><a href="https://drive.google.com/file/d/1NmSaZvbunQVkovdeHWJKt5h-58t5yd1y/view?usp=drivesdk"><i class="fas fa-tools"></i> Tools I Use</a></li>
+                <li><a href="https://kelvinagyareyeboah.netlify.app"><i class="fas fa-user"></i> About Me</a></li>
+            </ul>
+        </div>
+        <div class="footer-right">
+            <h4>Connect and let's build 📱</h4>
+            <div class="social-links">
+                <a href="https://instagram.com/_.yo.kelvin"><i class="fab fa-instagram"></i> Instagram </a>
+                <a href="https://github.com/KelvCodes"><i class="fab fa-github"></i> GitHub</a>
+                <a href="https://www.linkedin.com/in/kelvin-agyare-yeboah-6728a7301/"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                
+            </div>
+            <p class="copyright">© 2025 CryptoBeast. All rights reserved. ⚖️</p>
+        </div>
+    </div>
+</footer>
+
+<style>
+footer {
+    padding: 2rem 1rem;
+    background: var(--card-bg-light);
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-left,
+.footer-middle,
+.footer-right {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-left h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.footer-middle ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-middle ul li {
+    margin: 0.5rem 0;
+}
+
+.footer-middle a {
+    text-decoration: none;
+    color: inherit;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-middle a:hover {
+    opacity: 1;
+}
+
+.footer-right .social-links {
+    margin: 1rem 0;
+    display: flex;
+    gap: 1rem;
+}
+
+.footer-right .social-links a {
+    text-decoration: none;
+    color: inherit;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-right .social-links a:hover {
+    opacity: 1;
+}
+
+.copyright {
+    margin-top: 1rem;
+    opacity: 0.8;
+}
+
+body.dark-mode footer {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.landing-page footer {
+    padding: 1rem;
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-left h3 {
+        justify-content: center;
+    }
+    
+    .footer-middle a {
+        justify-content: center;
+    }
+    
+    .footer-right .social-links {
+        justify-content: center;
+    }
+}
+</style>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.5.4/dist/ethers.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
