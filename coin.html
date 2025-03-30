@@ -1,1 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoBeast | Coin Details</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+</head>
+<body>
+    <header class="header">
+        <h1 id="coin-header"><i class="fas fa-coins"></i> Coin Details</h1>
+        <div class="header-controls">
+            <button class="connect-wallet-btn" onclick="connectWallet()">Connect Wallet</button>
+            <span id="wallet-status">Not Connected</span>
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+            <button class="back-btn" onclick="window.location.href='crypto.html'">Back to Dashboard</button>
+        </div>
+    </header>
 
+    <div class="coin-container">
+        <div class="coin-card">
+            <div class="coin-header">
+                <img id="coin-img" class="coin-logo" src="https://via.placeholder.com/50" alt="Coin Logo" onerror="this.src='https://via.placeholder.com/50';">
+                <div>
+                    <h2 id="coin-name">Loading...</h2>
+                    <span id="coin-symbol" class="coin-symbol"></span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span id="coin-price" class="price-display">$0.00</span>
+                <span id="price-change" class="change-display">0.00%</span>
+            </div>
+            <div class="coin-stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label">Market Cap</span>
+                    <span id="coin-marketcap" class="stat-value">$0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">24h Volume</span>
+                    <span id="coin-volume" class="stat-value">$0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Circulating Supply</span>
+                    <span id="coin-supply" class="stat-value">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">All-Time High</span>
+                    <span id="coin-ath" class="stat-value">$0</span>
+                </div>
+            </div>
+            <div class="chart-container">
+                <h3>Price History</h3>
+                <canvas id="price-chart"></canvas>
+                <div class="chart-controls">
+                    <button onclick="fetchChartData(window.coinId, 7)">7D</button>
+                    <button onclick="fetchChartData(window.coinId, 30)">30D</button>
+                    <button onclick="fetchChartData(window.coinId, 90)">90D</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <h3>
+                    <img src="/img/cryptozen-logo.png" alt="CryptoBeast Logo" class="footer-logo">
+                    CryptoBeast 🌟
+                </h3>
+                <p>🚀 A personal crypto journey</p>
+                <p>🧑‍💻 Created by Agyare Kelvin Yeboah</p>
+            </div>
+            <div class="footer-middle">
+                <h4>Explore 🔍</h4>
+                <ul>
+                    <li><a href="https://kelvinagyareyeboah.netlify.app"><i class="fas fa-wallet"></i> My Portfolio</a></li>
+                    <li><a href="https://drive.google.com/file/d/1NmSaZvbunQVkovdeHWJKt5h-58t5yd1y/view?usp=drivesdk"><i class="fas fa-book"></i> Crypto Notes</a></li>
+                    <li><a href="https://drive.google.com/file/d/1NmSaZvbunQVkovdeHWJKt5h-58t5yd1y/view?usp=drivesdk"><i class="fas fa-tools"></i> Tools I Use</a></li>
+                    <li><a href="https://kelvinagyareyeboah.netlify.app"><i class="fas fa-user"></i> About Me</a></li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <h4>Connect and let's build 📱</h4>
+                <div class="social-links">
+                    <a href="https://instagram.com/_.yo.kelvin"><i class="fab fa-instagram"></i> Instagram </a>
+                    <a href="https://github.com/KelvCodes"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://www.linkedin.com/in/kelvin-agyare-yeboah-6728a7301/"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    
+                </div>
+                <p class="copyright">© 2025 CryptoBeast. All rights reserved. ⚖️</p>
+            </div>
+        </div>
+    </footer>
+    <style>
+        footer {
+            padding: 2rem 1rem;
+            background: var(--card-bg-light);
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+            margin-top: 120px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-left,
+        .footer-middle,
+        .footer-right {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-left h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-logo {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        
+        .footer-middle ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-middle ul li {
+            margin: 0.5rem 0;
+        }
+        
+        .footer-middle a {
+            text-decoration: none;
+            color: inherit;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-middle a:hover {
+            opacity: 1;
+        }
+        
+        .footer-right .social-links {
+            margin: 1rem 0;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .footer-right .social-links a {
+            text-decoration: none;
+            color: inherit;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-right .social-links a:hover {
+            opacity: 1;
+        }
+        
+        .copyright {
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+        
+        body.dark-mode footer {
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        .landing-page footer {
+            padding: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-left h3 {
+                justify-content: center;
+            }
+            
+            .footer-middle a {
+                justify-content: center;
+            }
+            
+            .footer-right .social-links {
+                justify-content: center;
+            }
+        }
+        </style>
+
+    <script src="script.js"></script>
+</body>
+</html>
