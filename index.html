@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoBeast| Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="landing-page">
+    <header class="header">
+        <h1>
+            <img src="img/cryptozen-logo.png" alt="CryptoBeast Logo" class="header-logo"> CryptoBeast
+        </h1>
+        <div class="header-controls">
+            <button class="cta-btn" onclick="location.href='crypto.html'">
+                <i class="fas fa-chart-line"></i> Explore Dashboard
+            </button>
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+        </div>
+    </header>
 
+    <main class="hero">
+        <div class="hero-content">
+            <h1><i class="fas fa-rocket"></i> Your Web3 & ML Crypto Command Center</h1>
+            <p>Track portfolios, predict prices with AI, and explore blockchain insights—all in one place.</p>
+            <div class="floating-icons">
+                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC" class="crypto-icon">
+                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH" class="crypto-icon">
+                <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="SOL" class="crypto-icon">
+            </div>
+        </div>
+    </main>
+
+    <footer style="text-align: center;">
+                <p class="copyright" >© 2025 CryptoBeast. All rights reserved. ⚖️</p>
+         </footer>
+   
+
+
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
