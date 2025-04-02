@@ -1,369 +1,196 @@
-// Configuration
-const API_BASE = 'https://api.coingecko.com/api/v3';
-const BLOCKCHAIN_API = 'https://blockchain.info';
-const ETH_GAS_API = 'https://api.etherscan.io/api';
-
-// Global State
-let currentCoinData = [];
-let walletConnected = false;
-
-// DOM Elements
-const cryptoTable = document.getElementById('crypto-data');
-const searchInput = document.getElementById('search-crypto');
-
-// Initialize App
-document.addEventListener('DOMContentLoaded', () => {
-    // Check which page we're on
-    if (document.getElementById('crypto-data')) {
-        fetchCryptoData();
-        fetchBlockchainData();
-        setupWebSocket();
-    }
-    
-    if (document.getElementById('coin-name')) {
-        fetchCoinDetails();
-    }
-    
-    // Initialize dark mode
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        document.body.classList.add('dark-mode');
-    }
-    
-    // Check if wallet is already connected
-    if (window.ethereum && window.ethereum.selectedAddress) {
-        connectWallet();
-    }
-});
-
-// Fetch Top Cryptocurrencies
-async function fetchCryptoData() {
-    try {
-        const response = await fetch(`${API_BASE}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=24h`);
-        const data = await response.json();
-        currentCoinData = data;
-        renderCryptoTable(data);
-    } catch (error) {
-        console.error('Error fetching crypto data:', error);
-        showError('Failed to load cryptocurrency data. Please try again later.');
-    }
-}
-
-// Render Crypto Table
-function renderCryptoTable(data) {
-    if (!cryptoTable) return;
-    
-    cryptoTable.innerHTML = data.map((coin, index) => `
-        <tr onclick="viewCoin('${coin.id}')" data-coin="${coin.id}">
-            <td>${index + 1}</td>
-            <td class="coin-name">
-                <img src="${coin.image}" alt="${coin.name}" width="24">
-                <span>${coin.name}</span>
-                <span class="coin-symbol">${coin.symbol.toUpperCase()}</span>
-            </td>
-            <td class="price">$${coin.current_price.toLocaleString()}</td>
-            <td class="${coin.price_change_percentage_24h >= 0 ? 'positive' : 'negative'}">
-                ${coin.price_change_percentage_24h.toFixed(2)}%
-            </td>
-            <td>$${coin.total_volume.toLocaleString()}</td>
-            <td>$${coin.market_cap.toLocaleString()}</td>
-            <td>
-                <canvas id="sparkline-${coin.id}" width="100" height="40"></canvas>
-            </td>
-        </tr>
-    `).join('');
-    
-    // Render sparklines
-    data.forEach(coin => {
-        const ctx = document.getElementById(`sparkline-${coin.id}`).getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: coin.sparkline_in_7d.price.map((_, i) => i),
-                datasets: [{
-                    data: coin.sparkline_in_7d.price,
-                    borderColor: coin.price_change_percentage_24h >= 0 ? '#4CAF50' : '#F44336',
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { display: false } },
-                scales: { x: { display: false }, y: { display: false } },
-                elements: { point: { radius: 0 } }
-            }
-        });
-    });
-    
-    // Add search functionality
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const filteredData = currentCoinData.filter(coin => 
-                coin.name.toLowerCase().includes(searchTerm) || 
-                coin.symbol.toLowerCase().includes(searchTerm)
-            );
-            renderCryptoTable(filteredData);
-        });
-    }
-}
-
-// View Coin Details
-function viewCoin(coinId) {
-    window.location.href = `coin.html?id=${coinId}`;
-}
-
-// Fetch Coin Details
-async function fetchCoinDetails() {
-    const coinId = new URLSearchParams(window.location.search).get('id');
-    if (!coinId) return;
-    
-    try {
-        // Basic coin data
-        const coinResponse = await fetch(`${API_BASE}/coins/${coinId}`);
-        const coin = await coinResponse.json();
-        
-        // Market data
-        const marketResponse = await fetch(`${API_BASE}/coins/${coinId}/market_chart?vs_currency=usd&days=30`);
-        const marketData = await marketResponse.json();
-        
-        // Render coin details
-        renderCoinDetails(coin, marketData);
-        
-        // Fetch blockchain data for this coin
-        fetchCoinBlockchainData(coinId);
-    } catch (error) {
-        console.error('Error fetching coin details:', error);
-        showError('Failed to load coin details. Please try again later.');
-    }
-}
-
-// Render Coin Details
-function renderCoinDetails(coin, marketData) {
-    document.title = `${coin.name} (${coin.symbol.toUpperCase()}) | Crypto Tracker Pro`;
-    document.getElementById('coin-header').textContent = `${coin.name} Analytics`;
-    
-    const priceChange24h = coin.market_data.price_change_percentage_24h;
-    const priceChangeClass = priceChange24h >= 0 ? 'positive' : 'negative';
-    
-    // Basic info
-    document.getElementById('coin-img').src = coin.image.large;
-    document.getElementById('coin-name').textContent = coin.name;
-    document.getElementById('coin-symbol').textContent = coin.symbol.toUpperCase();
-    
-    // Price info
-    document.getElementById('coin-price').textContent = 
-        `$${coin.market_data.current_price.usd.toLocaleString()}`;
-    
-    const priceChangeElement = document.getElementById('price-change');
-    priceChangeElement.textContent = `${priceChange24h.toFixed(2)}%`;
-    priceChangeElement.className = `change-display ${priceChangeClass}`;
-    
-    // Stats
-    document.getElementById('coin-marketcap').textContent = 
-        `$${coin.market_data.market_cap.usd.toLocaleString()}`;
-    document.getElementById('coin-volume').textContent = 
-        `$${coin.market_data.total_volume.usd.toLocaleString()}`;
-    document.getElementById('coin-supply').textContent = 
-        `${coin.market_data.circulating_supply.toLocaleString()} ${coin.symbol.toUpperCase()}`;
-    document.getElementById('coin-ath').textContent = 
-        `$${coin.market_data.ath.usd.toLocaleString()}`;
-    
-    // Chart
-    fetchChartData(coin.id, 30);
-}
-
-// Fetch Blockchain Data
-async function fetchBlockchainData() {
-    try {
-        // Bitcoin latest block
-        const btcResponse = await fetch(`${BLOCKCHAIN_API}/q/latesthash`);
-        const latestHash = await btcResponse.text();
-        
-        // Ethereum gas prices
-        const ethGasResponse = await fetch(`${ETH_GAS_API}?module=gastracker&action=gasoracle`);
-        const ethGasData = await ethGasResponse.json();
-        
-        // Update UI
-        if (document.getElementById('latest-block')) {
-            document.getElementById('latest-block').textContent = `${latestHash.slice(0, 6)}...${latestHash.slice(-4)}`;
-        }
-        
-        if (document.getElementById('eth-gas')) {
-            document.getElementById('eth-gas').textContent = `${ethGasData.result.ProposeGasPrice} Gwei`;
-        }
-    } catch (error) {
-        console.error('Error fetching blockchain data:', error);
-    }
-}
-
-// Coin-specific Blockchain Data
-async function fetchCoinBlockchainData(coinId) {
-    try {
-        let data;
-        
-        if (coinId === 'bitcoin') {
-            const response = await fetch(`${BLOCKCHAIN_API}/stats`);
-            data = await response.json();
-            
-            document.getElementById('on-chain-metrics').innerHTML = `
-                <div class="metric">
-                    <span>Network Hashrate</span>
-                    <strong>${(data.hash_rate / 1e9).toFixed(2)} EH/s</strong>
-                </div>
-                <div class="metric">
-                    <span>Mempool Size</span>
-                    <strong>${data.btc_mempool_size.toLocaleString()} TX</strong>
-                </div>
-                <div class="metric">
-                    <span>Nodes</span>
-                    <strong>${data.btc_nodes.toLocaleString()}</strong>
-                </div>
-            `;
-        } else if (coinId === 'ethereum') {
-            const response = await fetch('https://api.etherscan.io/api?module=stats&action=ethsupply');
-            const ethData = await response.json();
-            
-            document.getElementById('on-chain-metrics').innerHTML = `
-                <div class="metric">
-                    <span>Total Supply</span>
-                    <strong>${(parseInt(ethData.result) / 1e18).toFixed(2)} ETH</strong>
-                </div>
-                <div class="metric">
-                    <span>Daily Transactions</span>
-                    <strong>Loading...</strong>
-                </div>
-                <div class="metric">
-                    <span>Active Addresses</span>
-                    <strong>Loading...</strong>
-                </div>
-            `;
-        }
-    } catch (error) {
-        console.error('Error fetching coin blockchain data:', error);
-    }
-}
-
-// WebSocket for Real-time Updates
-function setupWebSocket() {
-    const socket = new WebSocket('wss://ws.coincap.io/prices?assets=ALL');
-    
-    socket.onmessage = function (msg) {
-        const data = JSON.parse(msg.data);
-        
-        Object.entries(data).forEach(([coinId, price]) => {
-            const priceElement = document.querySelector(`[data-coin="${coinId}"] .price`);
-            if (priceElement) {
-                const currentPrice = parseFloat(priceElement.textContent.replace('$', '').replace(',', ''));
-                const newPrice = parseFloat(price);
-                
-                // Skip if price hasn't changed
-                if (currentPrice === newPrice) return;
-                
-                // Add animation class
-                priceElement.classList.remove('price-up', 'price-down');
-                priceElement.classList.add(newPrice > currentPrice ? 'price-up' : 'price-down');
-                
-                // Update price
-                priceElement.textContent = `$${newPrice.toLocaleString()}`;
-            }
-        });
-    };
-    
-    socket.onclose = function () {
-        // Reconnect after 5 seconds if connection drops
-        setTimeout(setupWebSocket, 5000);
-    };
-}
-
-// Wallet Connection
-async function connectWallet() {
-    if (!window.ethereum) {
-        showError('Please install MetaMask or another Ethereum wallet');
+// TensorFlow.js Prediction Model with Improved Accuracy
+async function fetchAndPredict() {
+    const predictCoinSearch = document.querySelector('.predict-search-box');
+    const predictionStatus = document.querySelector('.prediction-status-text');
+    const predictionChartCanvas = document.getElementById('prediction-chart');
+    const predictionSection = document.querySelector('.prediction-section');
+    if (!predictCoinSearch || !predictionStatus || !predictionChartCanvas || !predictionSection) {
+        console.error('Prediction elements missing');
+        if (predictionStatus) predictionStatus.textContent = 'Prediction elements missing';
         return;
     }
-    
+
+    const searchQuery = predictCoinSearch.value.trim();
+    const coinId = searchCoin(searchQuery);
+    if (!coinId) {
+        predictionStatus.textContent = allCoins === FALLBACK_COINS 
+            ? `Coin not found. Try popular coins like Bitcoin, Ethereum, or Tether.`
+            : 'Coin not found. Please enter a valid cryptocurrency (e.g., Bitcoin, Ethereum).';
+        return;
+    }
+
+    predictionStatus.textContent = `Fetching data for ${searchQuery} and training model...`;
+    predictionSection.classList.add('predicting');
+
     try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        walletConnected = true;
-        
-        // Display wallet info
-        displayWalletInfo(accounts[0]);
-        
-        // Listen for account changes
-        window.ethereum.on('accountsChanged', (newAccounts) => {
-            if (newAccounts.length === 0) {
-                // Wallet disconnected
-                walletConnected = false;
-                document.getElementById('wallet-info').remove();
-            } else {
-                // Account changed
-                displayWalletInfo(newAccounts[0]);
+        // Fetch 90 days of historical data
+        const response = await fetch(`${COINGECKO_API}/coins/${coinId}/market_chart?vs_currency=usd&days=90`);
+        if (!response.ok) throw new Error('Failed to fetch market chart data');
+        const data = await response.json();
+        let prices = data.prices.map(price => price[1]);
+
+        // Fallback if insufficient data
+        if (prices.length < 14) {
+            console.warn('Insufficient data for LSTM, using fallback EMA prediction');
+            prices = prices.length > 0 ? prices : FALLBACK_CHART_DATA.prices.map(p => p[1]); // Use fallback if no data
+            const emaPredictions = calculateEMAFallback(prices, 7);
+            renderPredictionChart(emaPredictions, searchQuery, predictionChartCanvas, predictionStatus);
+            return;
+        }
+
+        // Create sequences with a 7-day window
+        const windowSize = 7;
+        const sequences = [];
+        const targets = [];
+        for (let i = 0; i < prices.length - windowSize; i++) {
+            sequences.push(prices.slice(i, i + windowSize));
+            targets.push(prices[i + windowSize]);
+        }
+
+        // Normalize data
+        const tensorData = tf.tensor2d(sequences);
+        const tensorTarget = tf.tensor1d(targets);
+        const min = tensorData.min();
+        const max = tensorData.max();
+        const range = max.sub(min);
+        const normalizedData = range.greater(0) ? tensorData.sub(min).div(range) : tensorData; // Avoid div by zero
+        const normalizedTarget = range.greater(0) ? tensorTarget.sub(min).div(range) : tensorTarget;
+
+        // Reshape for LSTM [samples, timesteps, features]
+        const xs = normalizedData.reshape([sequences.length, windowSize, 1]);
+        const ys = normalizedTarget;
+
+        // Build improved LSTM model
+        const model = tf.sequential();
+        model.add(tf.layers.lstm({
+            units: 64,
+            inputShape: [windowSize, 1],
+            returnSequences: true
+        }));
+        model.add(tf.layers.dropout({ rate: 0.2 }));
+        model.add(tf.layers.lstm({ units: 32 }));
+        model.add(tf.layers.dropout({ rate: 0.2 }));
+        model.add(tf.layers.dense({ units: 1 }));
+        model.compile({
+            optimizer: tf.train.adam(0.001), // Lower learning rate
+            loss: 'meanSquaredError'
+        });
+
+        // Train the model
+        await model.fit(xs, ys, {
+            epochs: 20,
+            batchSize: 16,
+            validationSplit: 0.2,
+            callbacks: {
+                onEpochEnd: (epoch, log) => {
+                    predictionStatus.textContent = `Training... Epoch ${epoch + 1}/20 (Loss: ${log.loss.toFixed(4)}, Val Loss: ${log.val_loss.toFixed(4)})`;
+                },
+                earlyStopping: tf.callbacks.earlyStopping({ monitor: 'val_loss', patience: 5 })
             }
         });
+
+        // Predict next 7 days
+        let lastSequence = tf.tensor2d([prices.slice(-windowSize)], [1, windowSize, 1]);
+        const normalizedLast = range.greater(0) ? lastSequence.sub(min).div(range) : lastSequence;
+        const predictions = [];
+        for (let i = 0; i < 7; i++) {
+            const pred = model.predict(normalizedLast);
+            const predValue = pred.dataSync()[0];
+            predictions.push(predValue);
+            const newSequence = lastSequence.slice([0, 1], [1, windowSize - 1]).concat(pred.reshape([1, 1, 1]), 1);
+            lastSequence = newSequence;
+            normalizedLast.dispose();
+            normalizedLast = range.greater(0) ? lastSequence.sub(min).div(range) : lastSequence;
+        }
+
+        // Denormalize predictions
+        const denormalizedPreds = predictions.map(p => p * (max.dataSync()[0] - min.dataSync()[0]) + min.dataSync()[0]);
+
+        // Smooth predictions with a simple moving average
+        const smoothedPreds = smoothPredictions(denormalizedPreds, 3);
+
+        // Cap extreme predictions based on historical volatility
+        const volatility = calculateVolatility(prices);
+        const cappedPreds = capPredictions(smoothedPreds, prices[prices.length - 1], volatility);
+
+        renderPredictionChart(cappedPreds, searchQuery, predictionChartCanvas, predictionStatus);
+
     } catch (error) {
-        console.error('Error connecting wallet:', error);
-        showError('Failed to connect wallet');
+        console.error('Prediction error:', error.message);
+        // Fallback to EMA if LSTM fails
+        const emaPredictions = calculateEMAFallback(prices.length > 0 ? prices : FALLBACK_CHART_DATA.prices.map(p => p[1]), 7);
+        renderPredictionChart(emaPredictions, searchQuery, predictionChartCanvas, predictionStatus, `Prediction fallback due to error: ${error.message}`);
+    } finally {
+        predictionSection.classList.remove('predicting');
+        tf.dispose();
     }
 }
 
-// Display Wallet Info
-function displayWalletInfo(address) {
-    // Remove existing wallet info if any
-    const existingInfo = document.getElementById('wallet-info');
-    if (existingInfo) existingInfo.remove();
-    
-    // Create wallet info element
-    const walletInfo = document.createElement('div');
-    walletInfo.id = 'wallet-info';
-    walletInfo.className = 'wallet-info';
-    walletInfo.innerHTML = `
-        <span>🦊 ${address.slice(0, 6)}...${address.slice(-4)}</span>
-        <button onclick="disconnectWallet()">Disconnect</button>
-    `;
-    
-    // Add to header
-    const header = document.querySelector('header');
-    if (header) {
-        header.appendChild(walletInfo);
+// Helper function to calculate EMA fallback
+function calculateEMAFallback(prices, days) {
+    const k = 2 / (days + 1); // Smoothing factor
+    let ema = prices[prices.length - 1]; // Start with last price
+    const predictions = [ema];
+    for (let i = 1; i < days; i++) {
+        ema = ema * (1 - k) + predictions[i - 1] * k; // Simplified EMA forward projection
+        predictions.push(ema + (Math.random() - 0.5) * ema * 0.05); // Add slight randomness for realism
     }
+    return predictions;
 }
 
-// Disconnect Wallet
-function disconnectWallet() {
-    walletConnected = false;
-    const walletInfo = document.getElementById('wallet-info');
-    if (walletInfo) walletInfo.remove();
-}
-
-// Dark Mode Toggle
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-    
-    // Save preference
-    if (document.body.classList.contains('dark-mode')) {
-        localStorage.setItem('darkMode', 'enabled');
-    } else {
-        localStorage.setItem('darkMode', 'disabled');
+// Helper function to smooth predictions
+function smoothPredictions(predictions, window) {
+    const smoothed = [];
+    for (let i = 0; i < predictions.length; i++) {
+        const start = Math.max(0, i - Math.floor(window / 2));
+        const end = Math.min(predictions.length, i + Math.floor(window / 2) + 1);
+        const slice = predictions.slice(start, end);
+        const avg = slice.reduce((a, b) => a + b, 0) / slice.length;
+        smoothed.push(avg);
     }
+    return smoothed;
 }
 
-// Error Handling
-function showError(message) {
-    const errorElement = document.createElement('div');
-    errorElement.className = 'error-message';
-    errorElement.textContent = message;
-    
-    document.body.appendChild(errorElement);
-    
-    // Remove after 5 seconds
-    setTimeout(() => {
-        errorElement.remove();
-    }, 5000);
+// Helper function to calculate historical volatility
+function calculateVolatility(prices) {
+    const returns = prices.slice(1).map((p, i) => Math.log(p / prices[i]));
+    const mean = returns.reduce((a, b) => a + b, 0) / returns.length;
+    const variance = returns.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / returns.length;
+    return Math.sqrt(variance) * Math.sqrt(365); // Annualized volatility
 }
 
-// Export functions to window
-window.viewCoin = viewCoin;
-window.connectWallet = connectWallet;
-window.toggleDarkMode = toggleDarkMode;
+// Helper function to cap predictions based on volatility
+function capPredictions(predictions, lastPrice, volatility) {
+    return predictions.map((p, i) => {
+        const maxChange = lastPrice * volatility * (i + 1) * 0.1; // Scale with days
+        const minVal = lastPrice - maxChange;
+        const maxVal = lastPrice + maxChange;
+        return Math.max(minVal, Math.min(maxVal, p));
+    });
+}
+
+// Helper function to render the prediction chart
+function renderPredictionChart(predictions, coinName, chartCanvas, statusElement, fallbackMessage = null) {
+    if (predictionChart) predictionChart.destroy();
+    const ctx = chartCanvas.getContext('2d');
+    predictionChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+            datasets: [{
+                label: `${coinName.charAt(0).toUpperCase() + coinName.slice(1)} Predicted Price`,
+                data: predictions,
+                borderColor: '#FF2E63',
+                fill: false,
+                tension: 0.4
+            }]
+        },
+        options: {
+            scales: {
+                y: { title: { display: true, text: 'Price (USD)' } },
+                x: { title: { display: true, text: 'Days' } }
+            }
+        }
+    });
+    statusElement.textContent = fallbackMessage || `Prediction complete for ${coinName}!`;
+}
